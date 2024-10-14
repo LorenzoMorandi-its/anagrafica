@@ -1,0 +1,43 @@
+﻿<Window x:Class="AnagraficaApp.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnagraficaApp.ViewModel"
+        mc:Ignorable="d"
+        Title="Anagrafica" Height="350" Width="525">
+	<Window.DataContext>
+		<local:AnagraficaViewModel/>
+	</Window.DataContext>
+	<Grid>
+		<StackPanel>
+			
+			<TextBox Width="200" Margin="5" Text="{Binding NuovaPersona.Nome, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Nome"/>
+			<TextBox Width="200" Margin="5" Text="{Binding NuovaPersona.Cognome, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Cognome"/>
+			<DatePicker Width="200" Margin="5" SelectedDate="{Binding NuovaPersona.DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
+			<TextBox Width="200" Margin="5" Text="{Binding NuovaPersona.Indirizzo, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Indirizzo"/>
+			<TextBox Width="200" Margin="5" Text="{Binding NuovaPersona.Citta, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Città"/>
+			<TextBox Width="100" Margin="5" Text="{Binding NuovaPersona.CAP, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="CAP"/>
+			<TextBox Width="200" Margin="5" Text="{Binding NuovaPersona.Telefono, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Telefono"/>
+
+			
+			<Button Content="Aggiungi" Width="100" Margin="5"
+                    Command="{Binding AggiungiPersonaCommand}"
+                    IsEnabled="{Binding CanAddPersona}"/>
+
+			
+			<ListBox ItemsSource="{Binding Persone}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding ID}" Width="30"/>
+							<TextBlock Text="{Binding Nome}" Width="100"/>
+							<TextBlock Text="{Binding Cognome}" Width="100"/>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+	</Grid>
+</Window>
+
